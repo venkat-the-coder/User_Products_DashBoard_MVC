@@ -1,3 +1,8 @@
+using User_Products_DashBoard_MVC.Data;
+
+using User_Products_DashBoard_MVC.Extension;
+
+
 namespace User_Products_DashBoard_MVC
 {
     public class Program
@@ -6,8 +11,15 @@ namespace User_Products_DashBoard_MVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+            //register services 
+            builder.Services.AddMyAppServices(builder.Configuration);
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            
+
 
             var app = builder.Build();
 
