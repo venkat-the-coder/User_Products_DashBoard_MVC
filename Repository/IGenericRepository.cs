@@ -12,6 +12,8 @@ namespace User_Products_DashBoard_MVC.Repository
         void Remove(T entity);
         void Update(T entity);
 
+        Task<IEnumerable<T>> GetAllIncludingAsync(params Expression<Func<T, object>>[] includeProperties);
+
         Task<int> SaveChangesAsync();
     }
 

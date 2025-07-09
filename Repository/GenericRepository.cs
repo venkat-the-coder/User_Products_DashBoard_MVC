@@ -52,5 +52,18 @@ namespace User_Products_DashBoard_MVC.Repository
         {
             return await _appContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<T>> GetAllIncludingAsync(params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _dbSet.AsNoTracking().AsQueryable();
+
+            foreach(var property in includeProperties)
+            {
+                query = query.Include(property);
+            }
+
+            return await query.ToListAsync();
+
+        }
     }
 }
