@@ -17,10 +17,9 @@ namespace User_Products_DashBoard_MVC.Service
             await _repository.AddAsync(item);
         }
 
-        public async void DeleteItem(int id)
+        public async Task DeleteItem(T item)
         {
-            var item = await _repository.GetByIdAsync(id);
-            _repository.Remove(item);
+            await _repository.Remove(item);
         }
 
         public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
@@ -43,7 +42,7 @@ namespace User_Products_DashBoard_MVC.Service
             return await _repository.GetByIdAsync(id);
         }
 
-        public void UpdateItem(T item)
+        public async Task UpdateItem(T item)
         {
             _repository.Update(item);
         }

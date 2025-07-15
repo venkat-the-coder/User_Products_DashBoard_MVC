@@ -35,13 +35,13 @@ namespace User_Products_DashBoard_MVC.Repository
             return await _dbSet.FindAsync(id);
         }
 
-        public async void Remove(T entity)
+        public async Task Remove(T entity)
         {
             _dbSet.Remove(entity);
             await SaveChangesAsync();
         }
 
-        public async void Update(T entity)
+        public async Task Update(T entity)
         {
             _dbSet.Update(entity);
             await SaveChangesAsync();
@@ -57,7 +57,7 @@ namespace User_Products_DashBoard_MVC.Repository
         {
             IQueryable<T> query = _dbSet.AsNoTracking().AsQueryable();
 
-            foreach(var property in includeProperties)
+            foreach (var property in includeProperties)
             {
                 query = query.Include(property);
             }

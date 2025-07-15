@@ -9,8 +9,8 @@ namespace User_Products_DashBoard_MVC.Repository
 
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
         Task AddAsync(T entity);
-        void Remove(T entity);
-        void Update(T entity);
+        Task Remove(T entity);
+        Task Update(T entity);
 
         Task<IEnumerable<T>> GetAllIncludingAsync(params Expression<Func<T, object>>[] includeProperties);
 

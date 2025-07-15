@@ -1,0 +1,15 @@
+﻿@model ProductCategory
+@{
+    ViewData["Title"] = "UpdateCategory";
+}
+
+<h1>UpdateCategory</h1>
+
+<form asp-action="UpdateCategory" method="post">
+    @Html.AntiForgeryToken()
+    <input asp-for="Id" type="hidden" />
+    <div class="form-group">
+        <input type="text" class="form-control mb-3" asp-for="Name" placeholder="Enter category">
+    </div>
+    <button type="update"  class="btn btn-primary">Update</button>
+</form>

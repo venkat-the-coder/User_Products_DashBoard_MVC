@@ -34,5 +34,46 @@ namespace User_Products_DashBoard_MVC.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<ActionResult> UpdateCategory(int id)
+        {
+            var category = await _genericService.GetItemByIdAsync(id);
+            if (category != null)
+            {
+                return View(category);
+            }
+
+            return NotFound("Category Not Found");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateCategory(ProductCategory request)
+        {
+            var itemToBeUpdated = await _genericService.GetItemByIdAsync(request.Id);
+            if (itemToBeUpdated != null)
+            {
+                itemToBeUpdated.Name = request.Name;
+                await _genericService.UpdateItem(itemToBeUpdated);
+                return RedirectToAction(nameof(GetAllCategories));
+            }
+            return NotFound("Category to be Updated is Not Found");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteCategory(int id)
+        {
+            var itemTobeDeleted = await _genericService.GetItemByIdAsync(id);
+            if (itemTobeDeleted != null) {
+                Console.WriteLine(itemTobeDeleted.Name);
+                await _genericService.DeleteItem(itemTobeDeleted);
+                return RedirectToAction(nameof(GetAllCategories));
+            }
+
+            return NotFound("Category to be Deleted is Not Found");
+
+        }
     }
 }
